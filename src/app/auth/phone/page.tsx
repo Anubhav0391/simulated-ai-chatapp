@@ -10,6 +10,7 @@ import { Card } from "../../components/ui/card";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { useAuthStore } from "@/store/auth";
+import PublicRoutes from "@/app/components/PublicRoutes";
 
 const schema = z.object({
   phone: z
@@ -46,31 +47,33 @@ const PhoneAuthPage = () => {
   };
 
   return (
-    <div className="h-full flex items-center justify-center">
-      <Card className="sm:p-6 p-4 sm:w-lg w-[95%]">
-        <h1 className="text-3xl font-semibold">Get Started</h1>
-        <p className="-mt-5 mb-5">Enter your phone number to continue</p>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="sm:space-y-6 space-y-4"
-        >
-          <PhoneInput
-            name="phone"
-            register={register}
-            error={errors.phone?.message}
-            defaultDial={"+91"}
-          />
+    <PublicRoutes>
+      <div className="h-full flex items-center justify-center">
+        <Card className="sm:p-6 p-4 sm:w-lg w-[95%]">
+          <h1 className="text-3xl font-semibold">Get Started</h1>
+          <p className="-mt-5 mb-5">Enter your phone number to continue</p>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="sm:space-y-6 space-y-4"
+          >
+            <PhoneInput
+              name="phone"
+              register={register}
+              error={errors.phone?.message}
+              defaultDial={"+91"}
+            />
 
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? (
-              <Loader2 className="animate-spin w-5 h-5" />
-            ) : (
-              "Continue"
-            )}
-          </Button>
-        </form>
-      </Card>
-    </div>
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? (
+                <Loader2 className="animate-spin w-5 h-5" />
+              ) : (
+                "Continue"
+              )}
+            </Button>
+          </form>
+        </Card>
+      </div>
+    </PublicRoutes>
   );
 };
 

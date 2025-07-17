@@ -10,16 +10,8 @@ import Link from "next/link";
 type Theme = "light" | "dark";
 
 export const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter();
-  const path = usePathname();
   const [theme, setTheme] = useState("light");
   const { logout, isLoggedIn } = useAuthStore();
-
-  useEffect(() => {
-    if (isLoggedIn === null) return;
-    if (isLoggedIn && path.includes("/auth")) router.push("/");
-    else if (!isLoggedIn && !path.includes("auth")) router.push("/auth/phone");
-  }, [isLoggedIn, path]);
 
   const toggleTheme = (theme: Theme) => {
     localStorage.setItem("theme", theme);

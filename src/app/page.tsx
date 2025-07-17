@@ -7,6 +7,7 @@ import { Card } from "./components/ui/card";
 import { useRouter } from "next/navigation";
 import { Input } from "./components/ui/input";
 import { useEffect, useState } from "react";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 export default function Dashboard() {
   const { chatrooms, addChatroom, deleteChatroom, loading, deleting } =
@@ -46,68 +47,70 @@ export default function Dashboard() {
   }, [chatrooms]);
 
   return (
-    <div className="pt-6 w-full flex flex-col gap-4 h-full overflow-hidden">
-      <div className="flex justify-between items-center mx-auto sm:px-10 px-4 sm:max-w-[1000px] w-full">
-        <h2 className="text-3xl font-bold">Your Chatrooms</h2>
-        <Button
-          onClick={handleCreate}
-          disabled={loading}
-          className="sm:w-[200px] w-[50px]"
-        >
-          {loading ? (
-            <Loader2 className="size-4 animate-spin" />
+    <ProtectedRoutes>
+      <div className="pt-6 w-full flex flex-col gap-4 h-full overflow-hidden">
+        <div className="flex justify-between items-center mx-auto sm:px-10 px-4 sm:max-w-[1000px] w-full">
+          <h2 className="text-3xl font-bold">Your Chatrooms</h2>
+          <Button
+            onClick={handleCreate}
+            disabled={loading}
+            className="sm:w-[200px] w-[50px]"
+          >
+            {loading ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <>
+                <SquarePen className="size-5 sm:size-4" />
+                <p className="sm:block hidden">New Chat</p>
+              </>
+            )}
+          </Button>
+        </div>
+        <div className="mx-auto sm:px-10 px-4 sm:max-w-[1000px] w-full relative">
+          <Search className="absolute top-1/2 -translate-y-1/2 sm:left-14 left-7 opacity-40" />
+          <Input
+            placeholder="Search by title"
+            className="px-12"
+            onChange={handleSearch}
+          />
+        </div>
+        <div className="overflow-auto pb-6 grow">
+          {!filteredRooms?.length ? (
+            <div className="text-center gap-2 flex flex-col text-xl min-h-full justify-center items-center mx-auto sm:px-10 px-4 sm:max-w-[1000px] w-full">
+              <p> No chatrooms found.</p>
+            </div>
           ) : (
-            <>
-              <SquarePen className="size-5 sm:size-4" />
-              <p className="sm:block hidden">New Chat</p>
-            </>
-          )}
-        </Button>
-      </div>
-      <div className="mx-auto sm:px-10 px-4 sm:max-w-[1000px] w-full relative">
-        <Search className="absolute top-1/2 -translate-y-1/2 sm:left-14 left-7 opacity-40" />
-        <Input
-          placeholder="Search by title"
-          className="px-12"
-          onChange={handleSearch}
-        />
-      </div>
-      <div className="overflow-auto pb-6 grow">
-        {!filteredRooms?.length ? (
-          <div className="text-center gap-2 flex flex-col text-xl min-h-full justify-center items-center mx-auto sm:px-10 px-4 sm:max-w-[1000px] w-full">
-            <p> No chatrooms found.</p>
-          </div>
-        ) : (
-          <div className="sm:space-y-4 space-y-2 mx-auto sm:px-10 px-4 sm:max-w-[1000px] w-full">
-            {filteredRooms?.map((room) => (
-              <Card
-                onClick={() => router.push(`/${room.id}`)}
-                key={room.id}
-                className=" sm:p-6 p-4 flex-row justify-between items-center cursor-pointer"
-              >
-                <div>
-                  <h3 className="text-lg font-semibold">{room.title}</h3>
-                  <p className="text-xs text-gray-500 line-clamp-1">
-                    ID: {room.id}
-                  </p>
-                </div>
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={(e) => handleDelete(e, room.id)}
-                  disabled={deleting === room.id}
+            <div className="sm:space-y-4 space-y-2 mx-auto sm:px-10 px-4 sm:max-w-[1000px] w-full">
+              {filteredRooms?.map((room) => (
+                <Card
+                  onClick={() => router.push(`/${room.id}`)}
+                  key={room.id}
+                  className=" sm:p-6 p-4 flex-row justify-between items-center cursor-pointer"
                 >
-                  {deleting === room.id ? (
-                    <Loader2 className="size-4 animate-spin" />
-                  ) : (
-                    <Trash2 className="size-4" />
-                  )}
-                </Button>
-              </Card>
-            ))}
-          </div>
-        )}
+                  <div>
+                    <h3 className="text-lg font-semibold">{room.title}</h3>
+                    <p className="text-xs text-gray-500 line-clamp-1">
+                      ID: {room.id}
+                    </p>
+                  </div>
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={(e) => handleDelete(e, room.id)}
+                    disabled={deleting === room.id}
+                  >
+                    {deleting === room.id ? (
+                      <Loader2 className="size-4 animate-spin" />
+                    ) : (
+                      <Trash2 className="size-4" />
+                    )}
+                  </Button>
+                </Card>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </ProtectedRoutes>
   );
 }
