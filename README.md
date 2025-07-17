@@ -14,7 +14,7 @@ This is a simulation-based frontend project built with **NextJS**, **Zustand**, 
 
 ### 🔐 Authentication Module
 
-- Allows users to **log in using phone number and OTP**.
+- Allows users to **log in using phone number and OTP (CAN GET FROM CONSOLE OR LOCALSTORAGE)**.
 - **Country codes** are fetched dynamically from `restcountries.com`.
 - OTP verification is **simulated** using `setTimeout` and stored in `localStorage`.
 - Form validation is handled using **React Hook Form** and **Zod**.
