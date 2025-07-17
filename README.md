@@ -12,7 +12,7 @@ This is a simulation-based frontend project built with **NextJS**, **Zustand**, 
 
 ## 🚀 Features
 
-## 🔐 Authentication Module
+### 🔐 Authentication Module
 
 - Allows users to **log in using phone number and OTP**.
 - **Country codes** are fetched dynamically from `restcountries.com`.
@@ -21,7 +21,7 @@ This is a simulation-based frontend project built with **NextJS**, **Zustand**, 
 - State is managed globally using **Zustand**.
 - **Dark mode toggle** with theme persisted in `localStorage`.
 
-## 📊 Dashboard Module
+### 📊 Dashboard Module
 
 - Displays a **list of chatrooms** with their title and ID.
 - Users can **create** or **delete chatrooms**, with confirmation via `react-toastify`.
@@ -30,7 +30,7 @@ This is a simulation-based frontend project built with **NextJS**, **Zustand**, 
 - Uses **Zustand with localStorage persist** to store chatroom data.
 - Responsive design with **adaptive card layout** for all screen sizes.
 
-## 💬 Chatroom Module
+### 💬 Chatroom Module
 
 - Dedicated chat interface for each chatroom accessed via `/[roomId]`.
 - Supports **text and image messages**, with **image preview**.
@@ -113,16 +113,12 @@ npm run dev
   - The AI's reply is randomly selected from a set of predefined strings.
   - Typing indicators are shown during the delay for a more realistic experience.
 
----
-
 ### 🔍 Debounced Search in Dashboard
 - The dashboard includes a **search input** to filter chatrooms by title.
 - A custom `debounce` function delays filtering:
   - Reduces unnecessary renders and API/state calls.
   - Triggers the search logic **after a short pause in typing** (e.g., 300ms).
 - Chatrooms are filtered using `.includes()` on lowercase titles.
-
----
 
 ### ✅ Form Validation with React Hook Form + Zod
 - Phone number and OTP inputs are validated using:
@@ -133,15 +129,11 @@ npm run dev
   - OTP must match the value stored in `localStorage`.
 - Errors are displayed dynamically beneath each input field.
 
----
-
 ### 🔐 Authentication Flow
 1. User enters their **phone number**.
 2. A simulated OTP is **generated and saved to `localStorage`**.
 3. User enters OTP to verify.
 4. On success, user is marked as logged in (`isLoggedIn: true` in Zustand).
-
----
 
 ### 💬 Chatroom & Messages Flow
 - **Dashboard:**
@@ -152,8 +144,6 @@ npm run dev
   - Implements **reverse infinite scroll** using `IntersectionObserver`.
   - Shows image previews and timestamps.
   - Supports **copy-to-clipboard** on message hover.
-
----
 
 ### 🧠 State Management
 - State is managed using **Zustand** with `persist` middleware.
