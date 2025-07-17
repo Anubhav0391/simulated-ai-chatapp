@@ -66,14 +66,14 @@ export default function Dashboard() {
             )}
           </Button>
         </div>
-        <div className="mx-auto sm:px-10 px-4 sm:max-w-[1000px] w-full relative">
+        {!!chatrooms?.length&&<div className="mx-auto sm:px-10 px-4 sm:max-w-[1000px] w-full relative">
           <Search className="absolute top-1/2 -translate-y-1/2 sm:left-14 left-7 opacity-40" />
           <Input
             placeholder="Search by title"
             className="px-12"
             onChange={handleSearch}
           />
-        </div>
+        </div>}
         <div className="overflow-auto pb-6 grow">
           {!filteredRooms?.length ? (
             <div className="text-center gap-2 flex flex-col text-xl min-h-full justify-center items-center mx-auto sm:px-10 px-4 sm:max-w-[1000px] w-full">
