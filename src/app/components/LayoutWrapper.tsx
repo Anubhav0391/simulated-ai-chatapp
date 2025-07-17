@@ -12,7 +12,7 @@ type Theme = "light" | "dark";
 export const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const path = usePathname();
-  const [theme, setTheme] = useState(localStorage?.getItem("theme") ?? "light");
+  const [theme, setTheme] = useState("light");
   const { logout, isLoggedIn } = useAuthStore();
 
   useEffect(() => {
@@ -24,12 +24,13 @@ export const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   const toggleTheme = (theme: Theme) => {
     localStorage.setItem("theme", theme);
     setTheme(theme);
-  };
-
-  useLayoutEffect(() => {
     if (theme === "dark") document.body.classList.add("dark");
     else document.body.classList.remove("dark");
-  }, [theme]);
+  };
+
+  useEffect(() => {
+    toggleTheme((localStorage.getItem("theme") as Theme) ?? "light");
+  }, []);
 
   return (
     <>
