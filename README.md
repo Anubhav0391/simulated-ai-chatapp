@@ -130,10 +130,10 @@ npm run dev
 - Errors are displayed dynamically beneath each input field.
 
 ### 🔐 Authentication Flow
-1. User enters their **phone number**.
-2. A simulated OTP is **generated and saved to `localStorage`**.
-3. User enters OTP to verify.
-4. On success, user is marked as logged in (`isLoggedIn: true` in Zustand).
+- User enters their **phone number**.
+- A simulated OTP is **generated and saved to `localStorage`**.
+- User enters OTP to verify.
+- On success, user is marked as logged in (`isLoggedIn: true` in Zustand).
 
 ### 💬 Chatroom & Messages Flow
 - **Dashboard:**
@@ -152,5 +152,14 @@ npm run dev
   - Chatrooms (`useChatStore`)
   - Chat messages (`useChatMsgStore`)
 - Shared state updates UI reactively across pages.
+
+---
+
+## 🔄 Improvements
+- Loaders should be implemented for:
+  - `/auth/phone` while fetching country codes
+  - `/` while searching
+  - `/` while loading chatroom data
+- Pagination can be implemented on Dashboard (chatroom list)
 
 
