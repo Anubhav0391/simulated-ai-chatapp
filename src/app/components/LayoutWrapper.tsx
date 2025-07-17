@@ -16,7 +16,7 @@ export const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   const { logout, isLoggedIn } = useAuthStore();
 
   useEffect(() => {
-    if (isLoggedIn === undefined) return;
+    if (isLoggedIn === null) return;
     if (isLoggedIn && path.includes("/auth")) router.push("/");
     else if (!isLoggedIn && !path.includes("auth")) router.push("/auth/phone");
   }, [isLoggedIn, path]);

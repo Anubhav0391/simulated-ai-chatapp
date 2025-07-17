@@ -6,7 +6,7 @@ interface AuthState {
   phone: string;
   countryCode: string;
   otp: string;
-  isLoggedIn?: boolean;
+  isLoggedIn: boolean|null;
   setPhone: (phone: string) => void;
   setCountryCode: (code: string) => void;
   sendOtp: () => void;
@@ -20,6 +20,7 @@ export const useAuthStore = create<AuthState>()(
       phone: "",
       countryCode: "+91",
       otp: "",
+      isLoggedIn:null,
       setPhone: (phone) => set({ phone }),
       setCountryCode: (code) => set({ countryCode: code }),
       sendOtp: () => {
